@@ -1,6 +1,7 @@
 #include <stdio.h>
 int checkscore(char std[]);
 int sq1(char std[]);
+int hardest(char std[][10]);
 
 int main() {
     int i,j;
@@ -25,6 +26,8 @@ int main() {
 		ss[i] = ans[i][0];
 	}
 	printf("number of no.1 stat => %d\n", sq1(ss));
+	
+	printf("show no. of hardest => %d\n", hardest(ans));
 }
 
 int checkscore(char std[]){
@@ -42,10 +45,30 @@ int checkscore(char std[]){
 int sq1(char std[]){
 	int score = 0, i;
 	
-	for(i = 0;i < 10; i++){
+	for(i = 0;i < 8; i++){
 		if(std[i] == 'D'){
 			score++;
 		}
 	}
 	return score;
+}
+
+int hardest(char std[][10]){
+	int score = 0, i, j, s = 10, q;
+	char keys[10] = {'D','B','D','C','C','D','A','E','A','D'};
+	
+	for(j = 0;j < 10;j++){
+		for(i = 0; i < 8; i++){
+			if(std[i][j] == keys[j]){
+				score++;
+			}
+		}
+		if(score < s){
+			s = score;
+			q = j;
+		}
+		score = 0;
+	}
+	
+	return q + 1;
 }
